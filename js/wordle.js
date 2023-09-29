@@ -1,6 +1,6 @@
 "use strict";
 
-const words = ["never", "gonna", "give", "you", "up"];
+const words = ["never", "gonna", "given", "young", "upper"];
 
 const wordle = document.querySelector(".wordle");
 const numRows = 8;
