@@ -1,7 +1,8 @@
 "use strict";
 
 // shuffle words
-const words = ["NEVER", "GONNA", "GIVEN", "YOUNG", "UPPER"];
+// const words = ["NEVER", "GONNA", "GIVEN", "YOUNG", "UPPER"];
+const words = ["NERVE", "GONNA", "GIVEN", `YOUNG`, "UPPER"];
 
 // shuffle the mainWords array randomly
 for (let i = words.length - 1; i > 0; i--) {
@@ -91,7 +92,7 @@ function addLetter(letter) {
 }
 
 function removeLetter() {
-  if (activeWordBox === numBoxes) {
+  if (activeWordBox > 0) {
     activeWordBox--;
   }
   if (
@@ -113,7 +114,7 @@ function removeLetter() {
       }
       box.textContent = null;
     });
-    activeWordBox--;
+    // activeWordBox--;
     if (activeWordBox < 0) {
       activeWordBox = 0;
     }
@@ -221,7 +222,7 @@ function startAnimation() {
   const correctWords = ["Never", "Gonna", "Give", "You", "Up!"];
 
   // create an array of the words in the random order
-  const randomWords = ["NEVER", "GONNA", "GIVEN", "YOUNG", "UP"];
+  const randomWords = ["NERVE", "GONNA", "GIVEN", "YOUNG", "UPPER"];
 
   // create a div for each word and add it to the modal content element
   randomWords.forEach((word, index) => {
@@ -230,13 +231,14 @@ function startAnimation() {
     wordDiv.classList.add("word");
     modalContent.appendChild(wordDiv);
 
+    // wait for 500ms and then animate the word to the correct position
     // animate the word to the correct position
     setTimeout(() => {
       wordDiv.style.transform = `translate(${
         index - correctWords.indexOf(word)
       }px, 0)`;
       wordDiv.textContent = correctWords[index];
-    }, index * 700);
+    }, (index + 1) * 700);
   });
   // wait 2 seconds and then show the button
   setTimeout(() => {
@@ -247,5 +249,5 @@ function startAnimation() {
     video.loop = true;
     video.classList.add("video");
     modalContent.appendChild(video);
-  }, 2000);
+  }, 3000);
 }
