@@ -1,6 +1,13 @@
 "use strict";
 
-const words = ["never", "gonna", "given", "young", "upper"];
+// shuffle words
+const words = ["NEVER", "GONNA", "GIVEN", "YOUNG", "UPPER"];
+
+// shuffle the mainWords array randomly
+for (let i = words.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [words[i], words[j]] = [words[j], words[i]];
+}
 
 const wordle = document.querySelector(".wordle");
 const numRows = 8;
@@ -50,7 +57,17 @@ document.addEventListener("keydown", (e) => {
   } else if (key === "Enter") {
     checkWord();
   } else if (key.length === 1) {
-    addLetter(key);
+    // check if letters are between a-z or A-Z
+    const code = key.charCodeAt(0);
+    if (
+      !(code > 64 && code < 91) &&
+      !(code > 96 && code < 123) &&
+      !(code > 47 && code < 58)
+    ) {
+      return;
+    }
+    // make uppercase
+    addLetter(key.toUpperCase());
   }
 });
 
@@ -168,9 +185,48 @@ function checkWord() {
       // show modal
       const modal = document.querySelector(".modal");
       modal.style.display = "flex";
+      // start animation
+      startAnimation();
     }
 
     activeWordRow++;
     activeWordBox = 0;
   }
+}
+
+function startAnimation() {
+  // get the modal content element
+  const modalContent = document.querySelector(".modal-content");
+
+  // create an array of the words in the correct order
+  const correctWords = ["Never", "Gonna", "Give", "You", "Up!"];
+
+  // create an array of the words in the random order
+  const randomWords = ["NEVER", "GONNA", "GIVEN", "YOUNG", "UP"];
+
+  // create a div for each word and add it to the modal content element
+  randomWords.forEach((word, index) => {
+    const wordDiv = document.createElement("div");
+    wordDiv.textContent = word;
+    wordDiv.classList.add("word");
+    modalContent.appendChild(wordDiv);
+
+    // animate the word to the correct position
+    setTimeout(() => {
+      wordDiv.style.transform = `translate(${
+        index - correctWords.indexOf(word)
+      }px, 0)`;
+      wordDiv.textContent = correctWords[index];
+    }, index * 700);
+  });
+  // wait 2 seconds and then show the button
+  setTimeout(() => {
+    // Wait for 2 seconds and start playing the video
+    const video = document.createElement("video");
+    video.src = "assets/rr.mp4";
+    video.autoplay = true;
+    video.loop = true;
+    video.classList.add("video");
+    modalContent.appendChild(video);
+  }, 2000);
 }
