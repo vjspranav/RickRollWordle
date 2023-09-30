@@ -134,11 +134,20 @@ function checkWord() {
     // if correct, add a class to the word box
     // if incorrect, remove the class from the word box
     const wordBoxes = document.querySelectorAll(".wordle-container");
+
     let currentWord = "";
-    for (let i = 0; i < numBoxes; i++) {
-      const box = document.getElementById(
-        `${activeWordRow}-${activeWordBox - i - 1}`
-      );
+    let nn = 0;
+    // while nn is guessedWords nn++
+    while (guessedWords.includes(nn)) {
+      nn++;
+    }
+    // get nth container
+    const firstContainer = document.getElementById(`${nn}`);
+    // get active row
+    const row = document.getElementById(`${nn}-${activeWordRow}`);
+    // Get word from row
+    for (let i = 0; i < words[0].length; i++) {
+      const box = document.getElementById(`${nn}-${activeWordRow}-${i}`);
       currentWord += box.textContent;
     }
 
