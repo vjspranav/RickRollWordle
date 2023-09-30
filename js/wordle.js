@@ -10,7 +10,7 @@ for (let i = words.length - 1; i > 0; i--) {
 }
 
 const wordle = document.querySelector(".wordle");
-const numRows = 8;
+const numRows = 10;
 const numBoxes = 5;
 
 let activeWordRow = 0;
@@ -191,6 +191,25 @@ function checkWord() {
 
     activeWordRow++;
     activeWordBox = 0;
+  }
+
+  // if all rows are filled, show modal, and say try again with a button to restart
+  if (activeWordRow === numRows) {
+    // show modal
+    const modal = document.querySelector(".modal");
+    modal.style.display = "flex";
+    const modalContent = document.querySelector(".modal-content");
+    // add try again button
+    // replace text content with try again
+    modalContent.textContent = "You Lost!";
+    const tryAgainBtn = document.createElement("button");
+    tryAgainBtn.textContent = "Try Again";
+    tryAgainBtn.classList.add("try-again-btn");
+    modalContent.appendChild(tryAgainBtn);
+    // add event listener to try again button
+    tryAgainBtn.addEventListener("click", () => {
+      window.location.reload();
+    });
   }
 }
 
