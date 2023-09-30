@@ -107,7 +107,6 @@ function removeLetter() {
       const box = document.getElementById(
         `${idx}-${activeWordRow}-${activeWordBox}`
       );
-      console.log(`${idx}-${activeWordRow}-${activeWordBox}`);
       // if box is uneditable, do not remove letter
       if (box.classList.contains("uneditable")) {
         return;
@@ -135,6 +134,20 @@ function checkWord() {
     // if correct, add a class to the word box
     // if incorrect, remove the class from the word box
     const wordBoxes = document.querySelectorAll(".wordle-container");
+    let currentWord = "";
+    for (let i = 0; i < numBoxes; i++) {
+      const box = document.getElementById(
+        `${activeWordRow}-${activeWordBox - i - 1}`
+      );
+      currentWord += box.textContent;
+    }
+
+    // Check if word exists in english dictionary
+    if (!allWords.includes(currentWord.toLowerCase())) {
+      alert("Word does not exist in English dictionary");
+      return;
+    }
+
     wordBoxes.forEach((wordBox, idx) => {
       // get active row
       const row = document.getElementById(`${idx}-${activeWordRow}`);
