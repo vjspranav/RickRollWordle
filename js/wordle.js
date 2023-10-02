@@ -214,10 +214,8 @@ function checkWord() {
 
     activeWordRow++;
     activeWordBox = 0;
-  }
-
-  // if all rows are filled, show modal, and say try again with a button to restart
-  if (activeWordRow === numRows) {
+    // if all rows are filled, show modal, and say try again with a button to restart
+  } else if (activeWordRow === numRows) {
     // show modal
     const modal = document.querySelector(".modal");
     modal.style.display = "flex";
