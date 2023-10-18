@@ -1,11 +1,18 @@
-/* Common dark theme styles */
 body {
   font-family: Arial, sans-serif;
   background-color: #333;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  place-items: center;
+  flex-direction: column;
 }
 
 h1 {
+  text-align: center;
   color: white;
 }
 
@@ -16,6 +23,5 @@ h1 {
   color: white;
   border: none;
   cursor: pointer;
+  display: inline-block;
 }
-
-/* Add any additional dark theme styles here */
